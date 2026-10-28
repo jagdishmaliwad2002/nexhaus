@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NexHaus – Smarter Homes, Brighter Lives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Caveat:wght@500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050b14;--bg2:#08121f;--card:#0b1726;--line:#16283d;--blue:#14b8ff;--blue2:#0a8fe0;--text:#e8f1fa;--mute:#8a9bb0}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+ul{list-style:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.hand{font-family:Caveat,cursive;color:var(--blue);font-size:22px;line-height:1.1}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 22px;border-radius:10px;font-weight:600;font-size:14px;border:1px solid var(--blue);cursor:pointer;transition:.2s;font-family:inherit}
+.btn.fill{background:linear-gradient(180deg,#27c4ff,#0a9af0);color:#021320;box-shadow:0 0 24px rgba(20,184,255,.35)}
+.btn.line{background:rgba(255,255,255,.03);color:var(--text);border-color:#2a3d55}
+.btn.ghost{background:transparent;color:var(--blue)}
+.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* nav */
+header{position:absolute;top:0;left:0;right:0;z-index:10}
+nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px}
+.logo svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:2}
+.menu{display:flex;gap:34px;font-size:13px;font-weight:500}
+.menu a:hover{color:var(--blue)}
+.nav-r{display:flex;align-items:center;gap:20px}
+.nav-r svg{width:17px;height:17px;stroke:var(--text);fill:none;stroke-width:2}
+.nav-r .btn{padding:8px 18px;font-size:13px;border-radius:8px}
+
+/* hero */
+.hero{position:relative;min-height:640px;padding-top:68px;overflow:hidden;background:radial-gradient(ellipse at 75% 40%,#0d2a4d 0%,#06101e 55%,#050b14 100%)}
+.hero .wrap{display:grid;grid-template-columns:1fr 1.15fr;align-items:center;min-height:572px;gap:20px}
+.hero h1{font-size:clamp(40px,5.2vw,58px);line-height:1.04;font-weight:800;letter-spacing:-.02em;margin:14px 0 18px}
+.hero h1 span{color:var(--blue);display:block}
+.hero p.lead{color:#b8c7d9;max-width:420px;font-size:15px;margin-bottom:26px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.perks{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap}
+.perk{display:flex;gap:9px;align-items:center;font-size:11.5px;color:var(--mute);line-height:1.3}
+.perk b{display:block;color:var(--text);font-weight:600}
+.perk svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:1.6;flex:none}
+.stage{position:relative;height:520px}
+.stage .hand{position:absolute;right:10px;top:50px;transform:rotate(-6deg);text-align:right;z-index:3}
+.pedestal{position:absolute;background:linear-gradient(#162338,#0a1424);border-radius:6px;box-shadow:0 20px 40px #000}
+
+/* css products (em based) */
+.prod{position:absolute;font-size:16px}
+.cam{width:7.6em;height:5.4em;background:linear-gradient(145deg,#fff,#c9d3df);border-radius:2.6em 2.6em 1.6em 1.6em;box-shadow:0 1em 2em rgba(0,0,0,.5)}
+.cam:before{content:"";position:absolute;left:50%;top:50%;width:3.1em;height:3.1em;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 30%,#2f4e75 0,#0a1220 45%,#000 70%);border-radius:50%;border:.35em solid #1a2433}
+.cam:after{content:"";position:absolute;left:50%;bottom:-1.6em;width:1.3em;height:1.8em;background:#aab6c4;transform:translateX(-50%);border-radius:0 0 .4em .4em}
+.spk{width:8.6em;height:7.6em;background:linear-gradient(90deg,#0a0f18,#1d2736 40%,#0a0f18);border-radius:1.4em;box-shadow:0 1em 2em #000}
+.spk:before{content:"";position:absolute;left:8%;right:8%;top:0;height:.5em;border-radius:1em;background:var(--blue);box-shadow:0 0 1.6em var(--blue)}
+.bulb{width:5em;height:6.4em}
+.bulb:before{content:"";position:absolute;left:0;top:0;width:5em;height:5em;border-radius:50%;background:radial-gradient(circle at 40% 35%,#fff,#7fdcff 40%,#1aa6ff);box-shadow:0 0 4em 1em rgba(20,184,255,.55)}
+.bulb:after{content:"";position:absolute;left:1em;top:4.6em;width:3em;height:1.9em;background:linear-gradient(90deg,#c7d0da,#fff,#9aa7b6);border-radius:.3em .3em .8em .8em}
+.door{width:4.3em;height:8em;background:linear-gradient(90deg,#0a0f18,#22303f,#0a0f18);border-radius:1em;box-shadow:0 1em 2em #000}
+.door:before{content:"";position:absolute;left:50%;bottom:.9em;width:1.5em;height:1.5em;transform:translateX(-50%);border-radius:50%;border:.18em solid var(--blue);box-shadow:0 0 1em var(--blue)}
+.door:after{content:"";position:absolute;left:50%;top:.9em;width:.6em;height:.6em;transform:translateX(-50%);border-radius:50%;background:#050810}
+.cube{width:5.4em;height:5.4em;background:linear-gradient(145deg,#f4f7fb,#aeb9c7);border-radius:1.1em;box-shadow:0 1em 2em rgba(0,0,0,.5)}
+.cube:before{content:"NexHaus";position:absolute;left:0;right:0;bottom:.6em;text-align:center;font-size:.42em;color:#8795a8;font-weight:600}
+.cube.dark{background:linear-gradient(145deg,#1b2431,#0a0f18)}
+.cube.dark:before{color:#6c7b8f}
+.therm{width:7em;height:7em;border-radius:50%;background:radial-gradient(circle,#05080d 55%,#1b2635 56%,#c8d2de 60%);box-shadow:0 1em 2em #000;display:grid;place-items:center;font-weight:300;font-size:2.2em;font-size:calc(1em*2.2)}
+.therm i{font-style:normal;font-size:.5em;display:block}
+.therm span{font-size:2.2rem;font-size:calc(.3 * 7em);line-height:1}
+.plug{width:4.6em;height:4.6em;background:linear-gradient(145deg,#fff,#c6d0dc);border-radius:1em;box-shadow:0 1em 2em rgba(0,0,0,.5)}
+.plug:before{content:"";position:absolute;left:1.1em;top:1.1em;width:.45em;height:1.3em;background:#8795a8;border-radius:.2em;box-shadow:1.4em 0 #8795a8}
+.plug:after{content:"";position:absolute;left:1.9em;top:2.9em;width:.8em;height:.8em;background:#8795a8;border-radius:50%}
+.pill{display:inline-block}
+
+/* sections */
+section{position:relative}
+.sec-h{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.sec-h h2{font-size:20px;font-weight:700}
+.sec-h a{font-size:11px;color:var(--blue);font-weight:600}
+.cats{padding:26px 0 36px;border-top:1px solid var(--line)}
+.cat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.cat{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;transition:.2s}
+.cat:hover{border-color:var(--blue);box-shadow:0 0 22px rgba(20,184,255,.2)}
+.cat .img{position:relative;height:110px;background:radial-gradient(circle at 50% 60%,#1a3350,#0a1320 75%);overflow:hidden}
+.cat .img .prod{left:50%;top:50%;font-size:12px;transform:translate(-50%,-50%)}
+.cat .img .therm span{font-size:1.6em}
+.cat .txt{padding:10px 12px;display:flex;justify-content:space-between;align-items:center;position:relative}
+.cat b{font-size:12px;display:block}
+.cat small{font-size:10px;color:var(--mute)}
+.cat svg{width:12px;height:12px;stroke:var(--text);fill:none;stroke-width:2}
+
+.why{padding:36px 0 50px}
+.why .wrap{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:30px;align-items:center}
+.why h2{font-size:34px;line-height:1.12;font-weight:800;margin:10px 0 14px;letter-spacing:-.01em}
+.why p{color:#aab9cb;font-size:13.5px;margin-bottom:22px;max-width:320px}
+.cmp{border-radius:14px;padding:24px 26px;background:var(--card);border:1px solid var(--line)}
+.cmp h3{font-size:14px;margin-bottom:16px;display:flex;align-items:center;gap:9px;font-weight:600}
+.cmp.us{border:1px solid var(--blue);box-shadow:0 0 30px rgba(20,184,255,.28),inset 0 0 30px rgba(20,184,255,.06)}
+.cmp.us h3{font-size:16px;color:#fff}
+.cmp.us h3 svg{width:22px;height:22px;stroke:var(--blue);fill:none;stroke-width:2}
+.cmp li{display:flex;align-items:center;gap:12px;font-size:12.5px;padding:8px 0;color:#c9d6e5}
+.cmp.them li{color:var(--mute)}
+.ic{flex:none;width:18px;height:18px;border-radius:50%;display:grid;place-items:center;font-size:10px;font-weight:700}
+.ok{background:var(--blue);color:#021320}
+.no{background:#2a3748;color:#8a9bb0}
+
+.app{background:linear-gradient(90deg,#06101b 0%,#0a1a2c 55%,#102235 100%);overflow:hidden}
+.app .wrap{display:grid;grid-template-columns:1fr 280px 1fr;gap:20px;align-items:end;min-height:340px}
+.app .l{align-self:center;padding:30px 0}
+.app h2{font-size:34px;line-height:1.1;font-weight:800;color:var(--blue);margin:10px 0 12px}
+.app p{font-size:13px;color:#b0bfd1;max-width:290px;margin-bottom:20px}
+.stores{display:flex;gap:10px;flex-wrap:wrap}
+.store{display:flex;align-items:center;gap:8px;border:1px solid #556;border-radius:8px;padding:6px 14px;background:#000;font-size:14px;font-weight:600;line-height:1.1;white-space:nowrap}
+.store small{display:block;font-size:8px;font-weight:400;color:#ccd}
+.store svg{width:20px;height:20px}
+.phone{width:240px;margin:-36px auto 0;border:6px solid #1c2735;border-bottom:0;border-radius:34px 34px 0 0;background:#060d17;padding:12px 12px 0;height:376px;box-shadow:0 0 40px rgba(20,184,255,.25);position:relative}
+.phone:before{content:"";position:absolute;left:50%;top:6px;width:70px;height:16px;border-radius:10px;background:#000;transform:translateX(-50%)}
+.ph-h{display:flex;justify-content:center;font-weight:600;font-size:13px;margin:22px 0 12px;gap:6px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-size:9px;text-align:center;color:var(--mute);margin-bottom:12px}
+.tabs div{padding:7px 0;border-radius:8px}
+.tabs .on{background:#10263d;color:var(--blue)}
+.tile-t{font-size:11px;font-weight:600;margin-bottom:8px}
+.tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.tile{background:#0f1c2d;border:1px solid #182b42;border-radius:10px;padding:10px;font-size:9.5px;min-height:72px;color:var(--mute)}
+.tile b{display:block;color:var(--text);font-size:10.5px;margin-top:6px}
+.tg{width:22px;height:12px;border-radius:7px;background:var(--blue);display:block;margin-top:6px;margin-left:auto;position:relative}
+.tg:after{content:"";position:absolute;right:2px;top:2px;width:8px;height:8px;border-radius:50%;background:#fff}
+.house{position:relative;height:340px;align-self:stretch;background:linear-gradient(180deg,#0b1d33 0%,#14263b 38%,#0a1523 100%);overflow:hidden;border-radius:0}
+.house .glass{position:absolute;left:10%;right:0;top:30%;height:44%;background:linear-gradient(90deg,#f5c47a,#ffdf9c 40%,#d99b4d);opacity:.85;box-shadow:0 0 60px rgba(255,190,100,.5);clip-path:polygon(0 0,100% 6%,100% 100%,0 100%)}
+.house .roof{position:absolute;left:4%;right:0;top:24%;height:7%;background:#05080e}
+.house .pool{position:absolute;left:0;right:0;bottom:0;height:26%;background:linear-gradient(180deg,#1aa6d8,#0a5a80)}
+.house .hand{position:absolute;right:20px;top:20px;transform:rotate(-5deg);text-align:right;color:#fff;z-index:2}
+
+.stats{background:#07101c;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:18px 24px}
+.stat{display:flex;align-items:center;gap:14px;justify-content:center}
+.stat svg{width:30px;height:30px;stroke:var(--blue);fill:none;stroke-width:1.6;flex:none}
+.stat b{font-size:22px;color:var(--blue);display:block;line-height:1.1}
+.stat span{font-size:11px;color:var(--mute)}
+
+.rev{padding:30px 0}
+.rev .eyebrow{color:var(--mute);font-size:10px}
+.arrows{display:flex;gap:18px}
+.arrows svg{width:16px;height:16px;stroke:var(--text);fill:none;stroke-width:2}
+.rev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:6px}
+.rv{display:grid;grid-template-columns:auto 1fr;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px}
+.rv .av{width:72px;height:92px;border-radius:8px;background:linear-gradient(160deg,#25405e,#0c1624);position:relative;overflow:hidden}
+.rv .av:before{content:"";position:absolute;left:50%;top:16px;width:30px;height:32px;background:#c79a7a;border-radius:50%;transform:translateX(-50%);box-shadow:0 -6px 0 2px #2b1f19}
+.rv .av:after{content:"";position:absolute;left:50%;bottom:-14px;width:62px;height:42px;background:#3a4a60;border-radius:50% 50% 0 0;transform:translateX(-50%)}
+.rv .av.f:before{background:#d9a98b;box-shadow:-9px 6px 0 4px #1a0f0c,9px 6px 0 4px #1a0f0c}
+.rv p{font-size:12px;color:#d4dfec}
+.rv .who{font-size:11px;font-weight:600;margin-top:8px}
+.stars{color:var(--blue);font-size:12px;letter-spacing:2px}
+
+.bundle{background:linear-gradient(90deg,#071a2c,#0a1f35 60%,#06101c);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+.bundle .wrap{display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:20px;align-items:center;min-height:150px}
+.bundle h2{font-size:22px;margin:4px 0 4px;font-weight:800}
+.bundle p{font-size:12px;color:#b0bfd1}
+.buy{display:flex;align-items:center;gap:14px;margin-top:14px;flex-wrap:wrap}
+.buy .btn{padding:9px 18px;font-size:13px}
+.price{font-size:22px;font-weight:700;color:var(--blue)}
+.price s{font-size:14px;color:var(--mute);font-weight:400;margin-left:8px}
+.save{border:1px solid var(--blue);color:var(--blue);padding:3px 10px;border-radius:5px;font-size:11px;font-weight:600}
+.bstage{position:relative;height:130px}
+.checks{display:grid;gap:7px;font-size:12px;position:relative}
+.checks li{display:flex;gap:10px;align-items:center}
+.checks .hand{position:absolute;right:0;bottom:-36px;font-size:20px;transform:rotate(-5deg)}
+
+.news{background:linear-gradient(90deg,#08131f,#0b1f33 70%,#2a2a22);padding:22px 0;border-bottom:1px solid var(--line)}
+.news .wrap{display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+.news h2{font-size:20px}
+.news p{font-size:12px;color:var(--mute)}
+.form{display:flex;flex:1;max-width:520px;background:#0a1624;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.form input{flex:1;background:transparent;border:0;padding:0 16px;color:var(--text);font:inherit;font-size:12px;min-height:40px}
+.form .btn{border-radius:0;padding:0 24px;font-size:12px}
+
+footer{background:#050b14;padding:28px 0 18px}
+.fgrid{display:grid;grid-template-columns:1.3fr repeat(4,.8fr) 1.4fr;gap:20px;align-items:start}
+.fgrid h4{font-size:11px;margin-bottom:10px;font-weight:600}
+.fgrid li{font-size:11px;color:var(--mute);margin-bottom:6px}
+.fgrid li a:hover{color:var(--blue)}
+.fgrid .logo{font-size:19px}
+.fgrid small{display:block;color:var(--mute);font-size:11px;margin:4px 0 0 32px}
+.soc{display:flex;gap:12px;color:var(--mute);font-size:12px;font-weight:600}
+.bot{display:flex;justify-content:space-between;border-top:1px solid var(--line);margin-top:20px;padding-top:12px;font-size:10px;color:var(--mute);flex-wrap:wrap;gap:10px}
+.bot nav{display:flex;gap:22px;height:auto}
+
+.burger{display:none;background:none;border:0;width:40px;height:40px;cursor:pointer;flex-direction:column;justify-content:center;align-items:center;gap:5px}
+.burger i{width:20px;height:2px;background:var(--text);display:block;transition:.2s}
+.burger[aria-expanded=true] i:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.burger[aria-expanded=true] i:nth-child(2){opacity:0}
+.burger[aria-expanded=true] i:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+body{overflow-x:hidden}
+img,svg{max-width:100%}
+
+/* large desktop */
+@media(min-width:1600px){.wrap{max-width:1360px}.hero{min-height:700px}.stage{height:560px}}
+
+/* laptop */
+@media(max-width:1180px){
+ .menu{gap:22px}
+ .perks{gap:18px}
+ .why .wrap{gap:20px}
+ .app .wrap{grid-template-columns:1fr 260px 1fr}
+ .fgrid{grid-template-columns:1.2fr repeat(4,.8fr)}
+ .fgrid>.stores{grid-column:1/-1;justify-content:flex-start!important}
+ .cat .img{height:96px}
+}
+
+/* tablet */
+@media(max-width:980px){
+ .burger{display:flex}
+ .menu{display:none;position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;background:rgba(5,11,20,.97);border-top:1px solid var(--line);border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}
+ .menu.open{display:flex}
+ .menu a{padding:16px 24px;font-size:15px;border-bottom:1px solid var(--line)}
+ .hero{min-height:0}
+ .hero .wrap{grid-template-columns:1fr;min-height:0;padding-top:40px;text-align:center}
+ .hero p.lead{margin-left:auto;margin-right:auto}
+ .cta,.perks{justify-content:center}
+ .stage{width:100%;max-width:600px;margin:0 auto;height:520px}
+ .cat-grid{grid-template-columns:repeat(3,1fr)}
+ .why .wrap{grid-template-columns:1fr;gap:22px}
+ .why p{max-width:520px}
+ .app .wrap{grid-template-columns:1fr;min-height:0;gap:0;text-align:center}
+ .app .l{padding:40px 0 30px}
+ .app p{margin-left:auto;margin-right:auto}
+ .stores{justify-content:center}
+ .phone{margin:0 auto}
+ .house{height:220px;margin:0 -24px}
+ .stats .wrap{grid-template-columns:repeat(2,1fr);gap:22px}
+ .rev-grid{grid-template-columns:1fr 1fr}
+ .rev-grid .rv:last-child{grid-column:1/-1}
+ .bundle .wrap{grid-template-columns:1fr 1fr;padding-top:22px;padding-bottom:22px}
+ .bundle .wrap>div:first-child{grid-column:1/-1}
+ .bstage{min-height:130px}
+ .news .wrap{flex-direction:column;align-items:flex-start;gap:16px}
+ .form{max-width:none;width:100%}
+ .fgrid{grid-template-columns:repeat(4,1fr)}
+ .fgrid>div:first-child{grid-column:1/-1}
+}
+
+/* mobile */
+@media(max-width:600px){
+ .wrap{padding:0 18px}
+ nav{height:60px}
+ .menu{top:60px}
+ .hero{padding-top:60px}
+ .nav-r{gap:10px}
+ .nav-r>svg:nth-of-type(1){display:none}
+ .nav-r .btn{padding:7px 12px;font-size:12px}
+ .logo{font-size:18px}
+ .hero h1{font-size:38px}
+ .hero .wrap{padding-top:28px}
+ .btn{min-height:44px;justify-content:center}
+ .cta .btn{flex:1 1 150px}
+ .perks{flex-direction:column;align-items:center;gap:12px}
+ .stage{zoom:.6;max-width:none;height:520px;margin:0 auto;width:calc(100%/.6)}
+ .sec-h h2{font-size:18px}
+ .cat-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+ .cat:last-child{grid-column:1/-1}
+ .why h2,.app h2{font-size:28px}
+ .cmp{padding:20px}
+ .house{height:170px;margin:0 -18px}
+ .phone{width:230px}
+ .stat{flex-direction:column;text-align:center;gap:6px}
+ .stat b{font-size:20px}
+ .rev-grid{grid-template-columns:1fr}
+ .rv{grid-template-columns:64px 1fr}
+ .rv .av{width:64px;height:84px}
+ .bundle .wrap{grid-template-columns:1fr}
+ .bundle h2{font-size:20px}
+ .bstage{height:140px}
+ .checks .hand{position:static;margin-top:6px;transform:rotate(-3deg)}
+ .form{flex-direction:column;border-radius:12px}
+ .form input{min-height:46px}
+ .form .btn{min-height:46px;border-radius:0}
+ .fgrid{grid-template-columns:repeat(2,1fr);gap:22px 16px}
+ .fgrid>.stores{justify-content:flex-start!important}
+ .bot{flex-direction:column;align-items:flex-start}
+}
+@media(max-width:380px){.hero h1{font-size:33px}.stage{zoom:.52;width:calc(100%/.52)}}
+@media(hover:none){.btn:hover,.cat:hover{transform:none;filter:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header><div class="wrap"><nav>
+ <a class="logo" href="#"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10H3z"/><path d="M9 21v-6h6v6"/></svg>NexHaus</a>
+ <div class="menu" id="menu"><a href="#cats">Products</a><a href="#why">Smart Living</a><a href="#footer">Support</a><a href="#footer">About</a></div>
+ <div class="nav-r">
+  <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+  <svg viewBox="0 0 24 24"><path d="M3 4h3l2.5 11h10L21 7H7"/><circle cx="9" cy="20" r="1.3"/><circle cx="18" cy="20" r="1.3"/></svg>
+  <a class="btn fill" href="#cats">Shop All</a>
+  <button class="burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="menu"><i></i><i></i><i></i></button>
+ </div>
+</nav></div></header>
+
+<section class="hero">
+ <div class="wrap">
+  <div>
+   <div class="eyebrow">A smarter tomorrow, at home</div>
+   <h1>Smarter Homes <span>Brighter Lives</span></h1>
+   <p class="lead">NexHaus designs intelligent home gadgets that bring comfort, security, and peace of mind to everyday living.</p>
+   <div class="cta"><a class="btn fill" href="#cats">Shop Smart Devices →</a><a class="btn line" href="#app">▷ Watch Video</a></div>
+   <div class="perks">
+    <div class="perk"><svg viewBox="0 0 24 24"><path d="M2 6h12v10H2zM14 9h4l3 3v4h-7"/><circle cx="6" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><div><b>Free Shipping</b>on orders over $50</div></div>
+    <div class="perk"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.500-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg><div><b>2-Year Warranty</b>Built to last</div></div>
+    <div class="perk"><svg viewBox="0 0 24 24"><path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="14" width="4" height="6" rx="1"/><rect x="17" y="14" width="4" height="6" rx="1"/></svg><div><b>24/7 Support</b>We're here for you</div></div>
+   </div>
+  </div>
+  <div class="stage" aria-hidden="true">
+   <div class="hand">A more connected<br>home starts here.</div>
+   <div class="pedestal" style="left:4%;top:92px;width:210px;height:120px"></div>
+   <div class="pedestal" style="left:14%;bottom:40px;width:150px;height:60px"></div>
+   <div class="pedestal" style="left:52%;bottom:20px;width:240px;height:70px"></div>
+   <div class="prod cam" style="left:8%;top:80px;font-size:19px"></div>
+   <div class="prod spk" style="left:36%;top:60px;font-size:20px"><span style="position:absolute;bottom:1.6em;left:0;right:0;text-align:center;font-size:.55em;color:#556">NexHaus</span></div>
+   <div class="prod bulb" style="left:62%;top:96px;font-size:18px"></div>
+   <div class="prod door" style="left:81%;top:140px;font-size:18px"></div>
+   <div class="prod cube" style="left:21%;top:290px;font-size:17px"></div>
+   <div class="prod therm" style="left:50%;top:260px;font-size:19px"><span>72</span></div>
+   <div class="prod cube dark" style="left:70%;top:350px;font-size:15px"></div>
+  </div>
+ </div>
+</section>
+
+<section class="cats" id="cats"><div class="wrap">
+ <div class="sec-h"><h2>Explore Our Smart Home Categories</h2><a href="#">View All Products →</a></div>
+ <div class="cat-grid">
+  <a class="cat" href="#"><div class="img"><div class="prod cam"></div></div><div class="txt"><div><b>Security</b><small>Cameras, doorbells &amp; more</small></div><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></div></a>
+  <a class="cat" href="#"><div class="img" style="background:radial-gradient(circle at 50% 50%,#6a4a20,#1a1410 80%)"><div class="prod bulb"></div></div><div class="txt"><div><b>Lighting</b><small>Smart lights for every mood</small></div><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></div></a>
+  <a class="cat" href="#"><div class="img"><div class="prod therm"><span>72</span></div></div><div class="txt"><div><b>Climate</b><small>Smarter comfort, lower bills</small></div><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></div></a>
+  <a class="cat" href="#"><div class="img"><div class="prod plug"></div></div><div class="txt"><div><b>Plugs &amp; Power</b><small>Control anything, anywhere</small></div><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></div></a>
+  <a class="cat" href="#"><div class="img"><div class="prod cube"></div></div><div class="txt"><div><b>Hubs &amp; Sensors</b><small>The brain of your smart home</small></div><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></div></a>
+ </div>
+</div></section>
+
+<section class="why" id="why"><div class="wrap">
+ <div>
+  <div class="eyebrow">Why NexHaus</div>
+  <h2>Intelligent Living,<br>Built Better</h2>
+  <p>More than gadgets — NexHaus brings a complete ecosystem designed for a safer, smarter, and more comfortable home.</p>
+  <a class="btn line" href="#" style="border-color:var(--blue);color:var(--blue)">See the Difference →</a>
+ </div>
+ <div class="cmp us">
+  <h3><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10H3z"/><path d="M9 21v-6h6v6"/></svg>NexHaus</h3>
+  <ul>
+   <li><span class="ic ok">✓</span>Seamless app control</li>
+   <li><span class="ic ok">✓</span>Works together as one system</li>
+   <li><span class="ic ok">✓</span>Premium build quality</li>
+   <li><span class="ic ok">✓</span>Privacy-first design</li>
+   <li><span class="ic ok">✓</span>Designed for modern living</li>
+  </ul>
+ </div>
+ <div class="cmp them">
+  <h3>Other Brands</h3>
+  <ul>
+   <li><span class="ic no">✕</span>Limited device compatibility</li>
+   <li><span class="ic no">✕</span>Multiple apps required</li>
+   <li><span class="ic no">✕</span>Basic build quality</li>
+   <li><span class="ic no">✕</span>Questionable data practices</li>
+   <li><span class="ic no">✕</span>Outdated designs</li>
+  </ul>
+ </div>
+</div></section>
+
+<section class="app" id="app"><div class="wrap">
+ <div class="l">
+  <div class="eyebrow">Control your home anywhere</div>
+  <h2>One App.<br>Total Control.</h2>
+  <p>The NexHaus app puts your entire home in your hands. Adjust lights, check your cameras, control the climate, and more — from anywhere in the world.</p>
+  <div class="stores">
+   <a class="store" href="#"><svg viewBox="0 0 24 24" fill="#fff"><path d="M16.400 12.600c0-2.400 2-3.500 2-3.600-1.100-1.600-2.800-1.800-3.400-1.800-1.400-.2-2.800.9-3.500.9s-1.800-.8-3-.8c-1.500 0-2.900.9-3.700 2.200-1.600 2.800-.4 6.800 1.100 9 .8 1.100 1.700 2.300 2.800 2.200 1.100 0 1.500-.7 2.900-.7s1.700.7 2.900.7 2-1.100 2.700-2.200c.9-1.200 1.200-2.400 1.200-2.500-.1 0-2-.8-2-3.400zM14.100 5.600c.6-.8 1-1.800.9-2.800-.9 0-2 .6-2.600 1.400-.6.700-1.100 1.700-.9 2.700 1 .1 2-.5 2.600-1.300z"/></svg><span><small>Download on the</small>App Store</span></a>
+   <a class="store" href="#"><svg viewBox="0 0 24 24"><path d="M4 3v18l9-9z" fill="#2fd3ff"/><path d="M4 3l12 7-3 2z" fill="#3ddc84"/><path d="M4 21l12-7-3-2z" fill="#ff4d4d"/><path d="m16 10 4 2-4 2-3-2z" fill="#ffd400"/></svg><span><small>GET IT ON</small>Google Play</span></a>
+  </div>
+ </div>
+ <div class="phone" aria-hidden="true">
+  <div style="display:flex;justify-content:space-between;font-size:8px;margin-top:-2px"><span>9:41</span><span>●●●</span></div>
+  <div class="ph-h"><span style="color:var(--blue)">⌂</span>NexHaus<span style="margin-left:auto">+</span></div>
+  <div class="tabs"><div class="on">⌂<br>Home</div><div>▢<br>Rooms</div><div>⚙<br>Automations</div></div>
+  <div class="tile-t">My Home</div>
+  <div class="tiles">
+   <div class="tile">Living Room<b>Lights</b><i class="tg"></i></div>
+   <div class="tile">🔒<b>Front Door</b>Locked</div>
+   <div class="tile">Thermostat<b>72°</b><i class="tg"></i></div>
+   <div class="tile" style="background:linear-gradient(135deg,#17304a,#0c1a2a)">Security Camera<b>Live</b></div>
+  </div>
+ </div>
+ <div class="house" aria-hidden="true">
+  <div class="hand">Your home.<br>From anywhere.</div>
+  <div class="roof"></div><div class="glass"></div><div class="pool"></div>
+ </div>
+</div></section>
+
+<div class="stats"><div class="wrap">
+ <div class="stat"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10H3z"/><path d="M9 21v-6h6v6"/></svg><div><b>250K+</b><span>Happy Homes</span></div></div>
+ <div class="stat"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6"/><circle cx="17" cy="9" r="2.500"/><path d="M17 14c3 0 5 2 5 5"/></svg><div><b>4.8/5</b><span>Average Rating</span></div></div>
+ <div class="stat"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.500 8 8 9 4.500-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/></svg><div><b>99.9%</b><span>Uptime Reliability</span></div></div>
+ <div class="stat"><svg viewBox="0 0 24 24"><path d="M5 19C5 9 10 5 20 4c0 10-4 15-14 15z"/><path d="M5 19 13 11"/></svg><div><b>1.2M+</b><span>kWh Saved Annually</span></div></div>
+</div></div>
+
+<section class="rev"><div class="wrap">
+ <div class="sec-h"><div><div class="eyebrow" style="color:var(--blue)">Real stories, real smart homes</div><h2 style="margin-top:4px">What Our Customers Say</h2></div>
+  <div class="arrows"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg><svg viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></div></div>
+ <div class="rev-grid">
+  <div class="rv"><div class="av"></div><div><p>"NexHaus made my home feel truly smart. Setup was easy and everything just works together."</p><div class="who">Daniel R.</div><div class="stars">★★★★★</div></div></div>
+  <div class="rv"><div class="av f"></div><div><p>"The app is beautiful and simple to use. I love being able to control my lights and security from anywhere."</p><div class="who">Priya S.</div><div class="stars">★★★★★</div></div></div>
+  <div class="rv"><div class="av"></div><div><p>"Excellent build quality and amazing customer support. NexHaus has completely transformed our home."</p><div class="who">Marcus T.</div><div class="stars">★★★★★</div></div></div>
+ </div>
+</div></section>
+
+<section class="bundle"><div class="wrap">
+ <div>
+  <div class="eyebrow">Limited time offer</div>
+  <h2>The Smart Home Starter Bundle</h2>
+  <p>Everything you need to get started — for a smarter, safer home.</p>
+  <div class="buy"><a class="btn fill" href="#">Shop the Bundle →</a><span class="price">$349<s>$497</s></span><span class="save">Save 30%</span></div>
+ </div>
+ <div class="bstage" aria-hidden="true">
+  <div class="prod cam" style="left:2%;top:18px;font-size:11px"></div>
+  <div class="prod cube dark" style="left:32%;top:40px;font-size:16px;width:7em"></div>
+  <div class="prod bulb" style="left:66%;top:20px;font-size:11px"></div>
+  <div class="prod plug" style="left:52%;top:78px;font-size:10px"></div>
+  <div class="prod cube" style="left:78%;top:80px;font-size:9px;border-radius:50%"></div>
+ </div>
+ <ul class="checks">
+  <li><span class="ic ok">✓</span>Indoor Security Camera</li>
+  <li><span class="ic ok">✓</span>Smart Light Bulbs (2-Pack)</li>
+  <li><span class="ic ok">✓</span>Smart Plug</li>
+  <li><span class="ic ok">✓</span>Multi-Sensor</li>
+  <li><span class="ic ok">✓</span>NexHaus Hub</li>
+  <div class="hand">A smarter<br>home for less.</div>
+ </ul>
+</div></section>
+
+<section class="news"><div class="wrap">
+ <div><h2>Stay in the Loop</h2><p>Get the latest products, tips, and exclusive offers from NexHaus.</p></div>
+ <div class="form"><input type="email" placeholder="Enter your email address" aria-label="Email address"><button class="btn fill" type="button">Subscribe</button></div>
+</div></section>
+
+<footer id="footer"><div class="wrap">
+ <div class="fgrid">
+  <div><a class="logo" href="#"><svg viewBox="0 0 24 24"><path d="M3 11 12 3l9 8v10H3z"/><path d="M9 21v-6h6v6"/></svg>NexHaus</a><small>Smarter homes. Brighter lives.</small></div>
+  <div><h4>Shop</h4><ul><li><a href="#">All Products</a></li><li><a href="#">Bundles</a></li><li><a href="#">New Arrivals</a></li><li><a href="#">Gift Cards</a></li></ul></div>
+  <div><h4>Support</h4><ul><li><a href="#">Help Center</a></li><li><a href="#">Warranty</a></li><li><a href="#">Returns</a></li><li><a href="#">Contact Us</a></li></ul></div>
+  <div><h4>Company</h4><ul><li><a href="#">Our Story</a></li><li><a href="#">Sustainability</a></li><li><a href="#">Careers</a></li><li><a href="#">Press</a></li></ul></div>
+  <div><h4>Follow Us</h4><div class="soc"><span>◎</span><span>▶</span><span>♪</span><span>f</span><span>𝕏</span></div></div>
+  <div class="stores" style="justify-content:flex-end">
+   <a class="store" href="#" style="padding:4px 10px;font-size:11px"><span><small>Download on the</small>App Store</span></a>
+   <a class="store" href="#" style="padding:4px 10px;font-size:11px"><span><small>GET IT ON</small>Google Play</span></a>
+  </div>
+ </div>
+ <div class="bot"><span>© 2024 NexHaus. All rights reserved.</span><nav><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Accessibility</a></nav></div>
+</div></footer>
+<script>
+(function(){
+ var b=document.querySelector('.burger'),m=document.getElementById('menu');
+ if(!b||!m)return;
+ function set(o){m.classList.toggle('open',o);b.setAttribute('aria-expanded',o);b.setAttribute('aria-label',o?'Close menu':'Open menu')}
+ b.addEventListener('click',function(){set(!m.classList.contains('open'))});
+ m.addEventListener('click',function(e){if(e.target.tagName==='A')set(false)});
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});
+ window.addEventListener('resize',function(){if(innerWidth>980)set(false)});
+})();
+</script>
+</body>
+</html>
